@@ -28,7 +28,7 @@ class RoomController(
         members.values.forEach { member ->
             val messageEntity = Message(
                 text = message,
-                userName = sender,
+                username = sender,
                 timestamp = System.currentTimeMillis()
             )
             messageDataSource.insertMessage(messageEntity)
@@ -42,11 +42,11 @@ class RoomController(
         return messageDataSource.getAllMessages()
     }
 
-    suspend fun tryDisconnect(userName: String) {
-        members[userName]?.socket?.close()
+    suspend fun tryDisconnect(username: String) {
+        members[username]?.socket?.close()
 
-        if (members.containsKey(userName)) {
-            members.remove(userName)
+        if (members.containsKey(username)) {
+            members.remove(username)
         }
     }
 }
